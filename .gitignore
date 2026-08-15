@@ -1,0 +1,123 @@
+# ==========================
+# Dependencies
+# ==========================
+node_modules/
+
+# ==========================
+# Logs
+# ==========================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ==========================
+# Runtime Data
+# ==========================
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# ==========================
+# Coverage
+# ==========================
+coverage/
+.nyc_output/
+
+# ==========================
+# Build Output
+# ==========================
+dist/
+build/
+out/
+.next/
+.cache/
+.temp/
+tmp/
+
+# ==========================
+# Environment Variables
+# ==========================
+.env
+.env.*
+!.env.example
+
+# ==========================
+# IDEs
+# ==========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.iml
+
+# ==========================
+# macOS
+# ==========================
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ==========================
+# Windows
+# ==========================
+Thumbs.db
+Desktop.ini
+
+# ==========================
+# TypeScript
+# ==========================
+*.tsbuildinfo
+
+# ==========================
+# ESLint
+# ==========================
+.eslintcache
+
+# ==========================
+# Prettier
+# ==========================
+.prettier-cache/
+
+# ==========================
+# Package Managers
+# ==========================
+.pnpm-store/
+.yarn/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# ==========================
+# npm Cache
+# ==========================
+.npm/
+
+# ==========================
+# Optional Lock Files
+# (Keep the one you use)
+# ==========================
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# ==========================
+# Miscellaneous
+# ==========================
+*.tgz
+*.gz
+*.zip
+*.tar
+*.bak
+*.tmp
+
+# ==========================
+# Debug
+# ==========================
+*.local
+*.orig
