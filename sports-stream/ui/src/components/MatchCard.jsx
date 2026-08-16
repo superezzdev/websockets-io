@@ -3,6 +3,12 @@ import LiveStatus from './LiveStatus';
 import ScoreDisplay from './ScoreDisplay';
 
 const MatchCard = ({ match, onSelect, isSelected }) => {
+  const formatTime = (dateStr) => {
+    if (!dateStr) return '';
+    const date = new Date(dateStr);
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  };
+
   return (
     <div className={`bg-xwhite border-thick rounded-3xl p-5 sm:p-6 flex flex-col justify-between transition-all duration-200 w-full shadow-[0_2px_0_0_#111] hover:-translate-y-1 hover:shadow-[0_6px_0_0_#111] ${isSelected ? 'ring-4 ring-primary ring-opacity-50 border-xblack' : 'border-xblack'}`}>
       
@@ -27,7 +33,7 @@ const MatchCard = ({ match, onSelect, isSelected }) => {
       {/* Footer */}
       <div className="mt-6 pt-5 border-t-2 border-dashed border-gray-200 flex justify-between items-end">
         <span className="text-xs sm:text-sm font-semibold text-muted uppercase tracking-wide">
-          {match.startTime}
+          {formatTime(match.startTime)}
         </span>
         <button 
           onClick={onSelect}

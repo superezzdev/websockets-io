@@ -1,40 +1,45 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import http from "http";
-import { matchRouter } from "./routes/matches.js";
+import cors from "cors";
+import helmet from "helmet";
 import { attachWebSocketServer } from "./ws/server.js";
 import { securityMiddleware } from "./arcjet.js";
-import { commentaryRouter } from "./routes/commentary.js";
 
-
-const PORT = Number(process.env.PORT) || 3000;
+const PORT = Number(process.env.PORT) || 8000;
 const HOST = process.env.HOST || 'localhost';
-
 
 const app = express();
 const server = http.createServer(app);
 
-
-
+app.use(helmet());
+app.use(cors({
+  origin: process.env.CLIENT_ORIGIN
+}));
 app.use(express.json());
-
-app.get("/", (req, res) => {
-  res.send("Hello from Express server!");
-});
-
-
 app.use(securityMiddleware());
 
-app.use('/matches', matchRouter)
-app.use('/matches/:id/commentary', commentaryRouter);
+app.get("/", (req, res) => {
+  res.send("WebRTC Signaling Server Running!");
+});
 
-const { broadcastMatchCreated, broadcastCommentary } = attachWebSocketServer(server);  
-app.locals.broadcastMatchCreated = broadcastMatchCreated;
-app.locals.broadcastCommentary = broadcastCommentary;
-
-
+const wss = attachWebSocketServer(server);
 
 server.listen(PORT, HOST, () => {
   const baseUrl =  HOST === '0.0.0.0' ? `http://localhost:${PORT}` :  `http://${HOST}:${PORT}`;
-  console.log(`Server is running at ${baseUrl}`);
-  console.log(`WebSocket server is running at ${baseUrl.replace('http://', 'ws://')}/ws`);
+  console.log(`[${new Date().toISOString()}] Server is running at ${baseUrl}`);
+  console.log(`[${new Date().toISOString()}] WebSocket Signaling server is running at ${baseUrl.replace('http://', 'ws://')}/ws`);
+});
+
+process.on("SIGTERM", () => {
+  console.log(`\n[${new Date().toISOString()}] SIGTERM received. Shutting down gracefully...`);
+  wss.close(() => {
+    console.log(`[${new Date().toISOString()}] WebSocket server closed.`);
+    server.close(() => {
+      console.log(`[${new Date().toISOString()}] HTTP server closed.`);
+      process.exit(0);
+    });
+  });
 });

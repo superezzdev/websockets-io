@@ -1,9 +1,4 @@
-import { useState, useEffect } from 'react';
-
-const ConnectionStatus = () => {
-  // In a real app, this would tie into the WebSocket connection state
-  const [status, setStatus] = useState('connected'); // 'connected', 'connecting', 'disconnected'
-  
+const ConnectionStatus = ({ status = 'disconnected' }) => {
   return (
     <div className="flex items-center gap-2 bg-xwhite border-thick border-xblack rounded-full px-4 py-2 font-bold text-xs uppercase tracking-wide">
       <div className="relative flex items-center justify-center w-3 h-3">
