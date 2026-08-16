@@ -1,6 +1,6 @@
 import ConnectionStatus from './ConnectionStatus';
 
-const Header = () => {
+const Header = ({ connectionStatus }) => {
   return (
     <header className="w-full mt-6 bg-primary rounded-3xl border-thick shadow-[0_4px_0_0_#111] overflow-hidden flex flex-col sm:flex-row justify-between items-center px-6 sm:px-10 py-6 sm:py-8">
       <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
@@ -13,7 +13,7 @@ const Header = () => {
       </div>
       
       <div className="mt-4 sm:mt-0">
-        <ConnectionStatus />
+        <ConnectionStatus status={connectionStatus} />
       </div>
     </header>
   );
